@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe — Social</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════ AUTH SCREENS ═══════════════ -->
+<div id="auth-screen" class="screen active">
+  <div class="auth-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <div class="auth-card">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">vibe</span>
+    </div>
+    <p class="brand-tagline">Share your world.</p>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="tab-btn active" data-tab="login">Sign In</button>
+      <button class="tab-btn" data-tab="register">Join</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form active">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="you@example.com" required />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary">Sign In</button>
+      <p class="auth-error" id="login-error"></p>
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" class="auth-form">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="reg-username" placeholder="yourname" required />
+      </div>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="reg-fullname" placeholder="Your Name" />
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="you@example.com" required />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary">Create Account</button>
+      <p class="auth-error" id="reg-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN APP ═══════════════ -->
+<div id="app-screen" class="screen">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="nav-brand">
+      <span class="brand-dot sm"></span>
+      <span class="brand-name sm">vibe</span>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-item active" data-page="feed">
+        <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-page="explore">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Explore</span>
+      </button>
+      <button class="nav-item" data-page="profile">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+      </button>
+    </div>
+
+    <div class="nav-user" id="nav-user-info">
+      <div class="nav-avatar" id="nav-avatar">?</div>
+      <div class="nav-user-details">
+        <span class="nav-username" id="nav-username">Loading...</span>
+        <button class="logout-btn" id="logout-btn">Sign out</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- ── FEED PAGE ── -->
+    <div id="page-feed" class="page active">
+      <div class="page-header">
+        <h1 class="page-title">Home</h1>
+      </div>
+
+      <!-- Create Post -->
+      <div class="create-post-box">
+        <div class="cp-avatar" id="cp-avatar">?</div>
+        <div class="cp-input-wrap">
+          <textarea id="new-post-content" placeholder="What's on your mind?" rows="2"></textarea>
+          <div class="cp-actions">
+            <input type="url" id="new-post-image" placeholder="Image URL (optional)" />
+            <button class="btn-post" id="submit-post">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts Feed -->
+      <div id="feed-posts" class="posts-list">
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+
+    <!-- ── EXPLORE PAGE ── -->
+    <div id="page-explore" class="page">
+      <div class="page-header">
+        <h1 class="page-title">Explore</h1>
+      </div>
+      <div id="explore-posts" class="posts-list">
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+
+    <!-- ── PROFILE PAGE ── -->
+    <div id="page-profile" class="page">
+      <div id="profile-content">
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="right-sidebar">
+    <div class="suggestions-box">
+      <h3 class="suggestions-title">Who to follow</h3>
+      <div id="suggestions-list">
+        <div class="loading-spinner sm"></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ═══════════════ MODAL ═══════════════ -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
